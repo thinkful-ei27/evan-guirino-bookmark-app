@@ -13,7 +13,7 @@ const api = (function () {
       title,
       url,
       desc,
-      rating
+      rating,
     };
 
     newBookmark = JSON.stringify(newBookmark);
@@ -27,6 +27,17 @@ const api = (function () {
     });
   };
 
+
+  const updateBookmark = function (id, updatedBookmark, callback) {
+    $.ajax({ 
+      url: `${BASE_URL}/bookmarks/${id}`,
+      method: 'PATCH',
+      contentType: 'application/json',
+      data: JSON.stringify(updatedBookmark),
+      success: callback
+    })
+}
+
   const deleteItem = function (id, callback) {
     $.ajax({
       url: `${BASE_URL}/bookmarks/${id}`,
@@ -39,7 +50,8 @@ const api = (function () {
   return {
     getBookmarks,
     createBookmark,
-    deleteItem
+    deleteItem, 
+    updateBookmark
   }; 
 
 }());

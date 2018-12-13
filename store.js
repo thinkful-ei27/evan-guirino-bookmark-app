@@ -2,24 +2,40 @@
 
 const store = (function () {
 
+
+  
   const findBookmarkById = function (id) {
-    return this.list.find(bookmark => bookmark.id === id)
+    
+    return this.list.find(bookmark => bookmark.id === id);
   };
 
-  const addBookMark = function (bookmark) {
+  const addBookmark = function (bookmark) {
     this.list.push(bookmark);
   };
 
+  const isAddingNewBookmark = function (id, isAdding) {
+    const bookmark = findBookmarkById(id);
+
+    bookmark.addNewBookmark = isAdding;
+
+  };
+
+  const addCondensedProp = function (id, newProp) {
+    const found = findBookmarkById(id);
+    Object.assign(found, newProp);
+  };
 
 
 
   return {
     list: [],
-    addNewBookMark: false, 
+    addNewBookmark: false, 
     filter: null,
     error: null,
 
     findBookmarkById,
-    addBookMark
+    addBookmark, 
+    isAddingNewBookmark,
+    addCondensedProp
   };
 }());  
