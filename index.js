@@ -1,6 +1,11 @@
+/*global api, store, bookmarkList */
 
-api.getBookmarks(function(data) {
-  console.log(data);
-});
+'use strict';
+$(function () {
+  api.getBookmarks( (bookmarks) => {
+    bookmarks.forEach((bookmark) => store.addBookMark(bookmark));
+    console.log(bookmarkList.render());
+  });
+})
 
-console.log(api.BASE_URL);
+

@@ -14,6 +14,7 @@ const Bookmark = (function () {
       title: title,
       rating: 0,
       description: '',
+      condensed: false
     };
   };
 
