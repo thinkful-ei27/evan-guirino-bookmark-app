@@ -2,8 +2,27 @@
 'use strict';
 
 const bookmarkList = (function () {
+  
+  const generateError = function (err) {
+    let message = '';
+    if (err.responseJSON && err.responseJSON.message) {
+      message = err.responseJSON.message;
+    } else {
+      message = `${err.code} Server Error`;
+    }
+
+    return `
+      <section class="error content">
+        <button id="cancel-error">Try Again</button>
+        <p>${message}</p>
+      </section>
+    `;
+  };
+  
   function generateBookmark (bookmark) {
 
+    
+ 
     const addingAClass = bookmark.addNewBookmark ? 'adding-bookmark' : 'bookmark-list-element';
 
     let bookmarkTitleandRating = `
@@ -70,14 +89,26 @@ const bookmarkList = (function () {
         </form>
       `;
     }
+
+
+    
+  
+
+
+
     const bookmarks = bookmarkList.map(bookmark => generateBookmark(bookmark));
   return  `${appForm}<ul>${bookmarks.join('')}</ul>`;
   }; 
 
   const render = function () {
     console.log('render running');
+    if (store.error) {
+      const errorMessage = generateError(store.error);
+      $('.error-container').html(errorMessage);
+    }
     let bookmarks = store.filterByRating();
     
+
     const bookmarkListStr = generateBookmarkStr(bookmarks);
 
     $('.bookmark-list').html(bookmarkListStr);
@@ -104,7 +135,12 @@ const bookmarkList = (function () {
       api.createBookmark(obj, (res) => {
         store.addBookmark(res);
         render();
-      });
+      },
+      (err) => {
+        store.setError(err);
+        render();
+      }
+      );
     }));
   };
 
@@ -132,15 +168,7 @@ const bookmarkList = (function () {
     }));
   }; 
 
-  const closeExtendedView = function  () {
-    $('.bookmark-list').on('click', '.close-extended', (event => {
-      console.log(event)
-      store.bookmarks.show = false;
-
-      console.log(store.console.log(store.bookmarks.show));
-      render();
-    }));
-  }; 
+  
   
   const filterBySelectedRating = function () {
     $('#rating').change((event) => {
@@ -157,12 +185,13 @@ const bookmarkList = (function () {
       let id = getBookmarkId(event.target);
       let newProp = {show: true};
       store.addShowProp(id, newProp);
-      
+      console.log('tried to add close functionality, but ran out of time');
       render();
       
     }) );
   };
 
+  
   
 
   const deleteBookmark = function () {
@@ -170,6 +199,10 @@ const bookmarkList = (function () {
       const id = getBookmarkId(event.target);
       api.deleteItem(id, (res) => {
         store.deleteBookmark(id);
+        render();
+      }, 
+      (err) => {
+        store.setError(err);
         render();
       });
       
@@ -183,8 +216,9 @@ const bookmarkList = (function () {
     closeBookmarkButtonHandler();
     handleSubmitBookmark();
     deleteBookmark();
-    closeExtendedView();
+   
     filterBySelectedRating();
+    
     
   }
 

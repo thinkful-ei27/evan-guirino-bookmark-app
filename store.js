@@ -2,7 +2,9 @@
 
 const store = (function () {
 
-
+  const setError = function (error) {
+    this.error = error;
+  }
   
   const findBookmarkById = function (id) {
     
@@ -45,14 +47,15 @@ const store = (function () {
     bookmarks: [],
     addNewBookmark: false, 
     minRating: null,
-    error: false,
+    error: null,
 
     findBookmarkById,
     addBookmark, 
     isAddingNewBookmark,
     addShowProp,
     deleteBookmark,
-    filterByRating
+    filterByRating,
+    setError
     
   };
 }());  
