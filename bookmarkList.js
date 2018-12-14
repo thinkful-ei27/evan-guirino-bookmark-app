@@ -19,6 +19,7 @@ const bookmarkList = (function () {
         <p>Rating: ${bookmark.rating} &#9733;'s</p>
         <a href="${bookmark.url}" class="url">${bookmark.url}</a>
         <button class="delete">Delete</button>
+        <button class="close-extended">Close</button>
       </div>
 
       `;
@@ -75,7 +76,8 @@ const bookmarkList = (function () {
 
   const render = function () {
     console.log('render running');
-    let bookmarks = [...store.bookmarks];
+    let bookmarks = store.filterByRating();
+    
     const bookmarkListStr = generateBookmarkStr(bookmarks);
 
     $('.bookmark-list').html(bookmarkListStr);
@@ -114,7 +116,7 @@ const bookmarkList = (function () {
 
   };
 
-  function addBookmarkButtonHandler () {
+  const addBookmarkButtonHandler = function  () {
     $('.add-bookmark-button').on('click', (event => {
       store.addNewBookmark = true;
       console.log(store.addNewBookmark);
@@ -122,7 +124,7 @@ const bookmarkList = (function () {
     }));
   }; 
 
-  function closeBookmarkButtonHandler () {
+  const closeBookmarkButtonHandler = function  () {
     $('body').on('click', '#close', (event => {
       store.addNewBookmark = false;
       console.log(store.addNewBookmark);
@@ -130,18 +132,38 @@ const bookmarkList = (function () {
     }));
   }; 
 
-  
+  const closeExtendedView = function  () {
+    $('.bookmark-list').on('click', '.close-extended', (event => {
+      console.log(event)
+      store.bookmarks.show = false;
 
+      console.log(store.console.log(store.bookmarks.show));
+      render();
+    }));
+  }; 
   
+  const filterBySelectedRating = function () {
+    $('#rating').change((event) => {
+      const ratingValue = $(event.target).val();
+      store.minRating = ratingValue;
+      
+       
+      render();
+    });
+  };
+   
   const expandBookmark = function() {
     $('.bookmark-list').on('click', '.bookmark-list-element', (event => {
       let id = getBookmarkId(event.target);
       let newProp = {show: true};
-      store.addShowProp(id, !newProp);
+      store.addShowProp(id, newProp);
+      
       render();
       
     }) );
   };
+
+  
 
   const deleteBookmark = function () {
     $('.bookmark-list').on('click', '.delete', (event) => {
@@ -161,6 +183,9 @@ const bookmarkList = (function () {
     closeBookmarkButtonHandler();
     handleSubmitBookmark();
     deleteBookmark();
+    closeExtendedView();
+    filterBySelectedRating();
+    
   }
 
   return {

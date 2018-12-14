@@ -29,8 +29,9 @@ const store = (function () {
   };
 
   const filterByRating = function () {
-   
-  }
+    return this.bookmarks.filter(bookmark => (bookmark.rating >= this.minRating));
+    
+  };
 
   const deleteBookmark = function (id) {
     // this.bookmarks = this.bookmarks.filter(bookmark => bookmark.id !== id);
@@ -43,13 +44,15 @@ const store = (function () {
   return {
     bookmarks: [],
     addNewBookmark: false, 
-    filter: null,
-    error: null,
+    minRating: null,
+    error: false,
 
     findBookmarkById,
     addBookmark, 
     isAddingNewBookmark,
     addShowProp,
-    deleteBookmark
+    deleteBookmark,
+    filterByRating
+    
   };
 }());  
