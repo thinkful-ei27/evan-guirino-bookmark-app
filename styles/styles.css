@@ -46,10 +46,9 @@ button:hover {
   background-color:#ddd;
 }
 
-.delete-button {
-  
-  float: right;
-  
+.delete {
+  position: absolute;
+  right: 0;
 }
 
 
@@ -93,7 +92,7 @@ select {
   margin-right: 20px;
   border: 1px solid grey;
   list-style: none;
-  box-shadow: rgba(0,0,0,0.5)
+ 
 }
 
 .bookmark-list- {
@@ -144,4 +143,3 @@ aside {
   right: 0;
   top: 8px;
 }
-
