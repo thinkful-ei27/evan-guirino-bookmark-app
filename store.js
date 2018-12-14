@@ -6,29 +6,42 @@ const store = (function () {
   
   const findBookmarkById = function (id) {
     
-    return this.list.find(bookmark => bookmark.id === id);
+    return this.bookmarks.find(bookmark => bookmark.id === id);
   };
 
   const addBookmark = function (bookmark) {
-    this.list.push(bookmark);
+    this.bookmarks.push(bookmark);
   };
 
   const isAddingNewBookmark = function (id, isAdding) {
-    const bookmark = findBookmarkById(id);
+    const bookmark = this.findBookmarkById(id);
 
     bookmark.addNewBookmark = isAdding;
 
   };
 
-  const addCondensedProp = function (id, newProp) {
-    const found = findBookmarkById(id);
-    Object.assign(found, newProp);
+  const addShowProp = function (id, newProp) {
+    const found = this.findBookmarkById(id);
+    
+    (Object.assign(found, newProp));
+    
+    
+  };
+
+  const filterByRating = function () {
+   
+  }
+
+  const deleteBookmark = function (id) {
+    // this.bookmarks = this.bookmarks.filter(bookmark => bookmark.id !== id);
+    const bookmark = this.findBookmarkById(id);
+    this.bookmarks.splice(bookmark, 1);
+
   };
 
 
-
   return {
-    list: [],
+    bookmarks: [],
     addNewBookmark: false, 
     filter: null,
     error: null,
@@ -36,6 +49,7 @@ const store = (function () {
     findBookmarkById,
     addBookmark, 
     isAddingNewBookmark,
-    addCondensedProp
+    addShowProp,
+    deleteBookmark
   };
 }());  

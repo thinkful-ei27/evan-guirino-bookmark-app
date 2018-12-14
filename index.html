@@ -15,24 +15,20 @@
       <header>
           <h1>My Bookmarks</h1>
       </header>
+    <div class="bookmark-controls">
     <button class="add-bookmark-button">Add a new bookmark</button>
-    <div class="dropdown">
-      <button id="dropdown-button" class="button">Filter Ratings</button>
+    <label for="rating">Rating</label>
+    <select id="rating" value="rating" name="rating">
+        <option value="5">5</option>
+        <option value="4">4</option>
+        <option value="3">3</option>
+        <option value="2">2</option>
+        <option value="1">1</option>
+      </select>
+  </div>
+    <section class="bookmark-list">
         
-      <div class="dropdown-content">
-          <ul>  
-            <li class="5-stars">5 stars</li>
-            <li class="4-stars">4 stars</li>
-            <li class="3-stars">3 stars</li>
-            <li class="2-stars">2 stars</li>
-            <li class="2-stars">1 star</li>
-          </ul>
-        </div>
-    </div>
-  
-    <ul class="bookmark-list">
-        
-    </ul>
+    </section>
 
 
   </div>

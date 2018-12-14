@@ -3,7 +3,7 @@
 'use strict';
 $(function () {
   bookmarkList.bindEventListeners();
-  bookmarkList.render()
+  bookmarkList.render();
   api.getBookmarks( (bookmarks) => {
     bookmarks.forEach((bookmark) => store.addBookmark(bookmark));
     bookmarkList.render();
@@ -11,10 +11,3 @@ $(function () {
 })
 
 
-api.getBookmarks((items) => {
-  const item = items[0];
-
-  api.updateBookmark(item.id, { rating: 3 }, () => {
-    console.log('updated!');
-  });
-});

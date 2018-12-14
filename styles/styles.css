@@ -1,11 +1,15 @@
 * {
   box-sizing: border-box;
+  line-height: 1.6;
   
 }
 
 body {
   font-family: 'Roboto', sans-serif;
+
 }
+
+
 
 h1 {
   text-align: left;
@@ -36,33 +40,42 @@ button:hover {
   background-color:#ddd;
 }
 
+.delete {
+  position: absolute;
+  right: 0;
+}
 
 
-.dropdown {
+
+.extended {
+  padding: 20px;
+  position: relative;
+}
+
+
+
+select {
   position: relative;
   display: inline-block;  
   margin-bottom: 100px;
-  margin-left: 70px
-}
-
-.dropdown-content {
-  display: none;
-  top: 31px;
-  left: 0px;
-  position: absolute;  
-  min-width: 100px;
-  border-radius: 15px;
-  width: 150px;
-  text-align: center;
+  
 }
 
 
 
-.dropdown-content li {
-  display: block;
-  font-size: 14px;
-  background-color:#ddd;
+.title-field, .url-field {
+  padding: 5px;
+  width: 600px;
 }
+
+.form-content {
+  background-color: #f4f4f4;
+  margin: 20% auto;
+  padding: 20px;
+  width: 70%;
+}
+
+
 
 .dropdown:hover .dropdown-content {
   display: block;
@@ -71,8 +84,6 @@ button:hover {
 .bookmark-list > li {
   margin-bottom: 20px;
   border: 1px solid grey;
- 
-
 }
 
 .bookmark-list {
@@ -95,4 +106,33 @@ button:hover {
   padding-left: 30px;
   background-color: rgba(231, 238, 245, 0.404);
   width: 100%;
+}
+
+.adding-bookmark {
+  
+  top: 0;
+  left: 0;
+  position: fixed;
+  
+  background-color: rgba(0,0,0,0.5,);
+  z-index: 1;
+  height: 100%;
+  width: 100%
+}
+
+.form-content {
+  position: relative;
+}
+
+ a{
+  width: 100%;
+  display: block;
+  white-space: nowrap;
+  
+  overflow: auto;
+}
+aside {
+  position: absolute;
+  right: 0;
+  top: 8px;
 }
